@@ -295,7 +295,12 @@
 
 <script type="text/javascript">
 var os = 'windows64';
-if (navigator.userAgent.indexOf('Mac') != -1) var os = 'mac'
+if (navigator.userAgent.indexOf('Mac') != -1) {
+	var os = 'mac';
+	if (navigator.userAgent.indexOf('Intel') == -1) {
+		os = 'macarm';
+	}
+}
 else if (navigator.userAgent.indexOf('Linux') != -1) var os = 'linux64'
 else if (navigator.userAgent.indexOf('WOW64') != -1 || navigator.userAgent.indexOf('Win64') != -1) var os='windows64';
 var but = document.getElementById('downloadbutton');
@@ -305,6 +310,10 @@ var hrefwin64exe = document.getElementById('win64exe').href;
 var hrefwin64zip = document.getElementById('win64zip').href;
 var hrefmacdmg = document.getElementById('macdmg').href;
 var hrefmactar = document.getElementById('mactar').href;
+if (os === 'macarm') {
+	hrefmacdmg = document.getElementById('macarmdmg').href;
+	hrefmactar = document.getElementById('macarmtar').href;
+}
 var hreflin64 = document.getElementById('lin64').href;
 switch (os) {
 case 'windows64':
@@ -319,6 +328,7 @@ case 'linux64':
 	linklin.href = hreflin64;
 break;
 case 'mac':
+case 'macarm':
 	but.getElementsByTagName('IMG')[0].src = '/assets/images/os/but_mac.svg';
 	but.href = hrefmacdmg;
 break;
